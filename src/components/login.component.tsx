@@ -91,6 +91,7 @@ export default class Login extends Component<Props, State> {
             onSubmit={this.handleLogin}
           >
             <Form>
+              <h4 style={{ textAlign: "center" }}>Log In</h4>
               <div className="form-group">
                 <label htmlFor="username">Username</label>
                 <Field name="username" type="text" className="form-control" />
@@ -116,7 +117,7 @@ export default class Login extends Component<Props, State> {
                   {loading && (
                     <span className="spinner-border spinner-border-sm"></span>
                   )}
-                  <span>Login</span>
+                  <span>Log In</span>
                 </button>
               </div>
 

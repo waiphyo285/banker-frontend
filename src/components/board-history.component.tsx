@@ -11,7 +11,7 @@ type State = {
   content: object[];
 }
 
-export default class BoardUser extends Component<Props, State> {
+export default class BoardHistory extends Component<Props, State> {
   constructor(props: Props) {
     super(props);
 
@@ -21,9 +21,8 @@ export default class BoardUser extends Component<Props, State> {
   }
 
   componentDidMount() {
-    UserService.getUserBoard().then(
+    UserService.getHistoryBoard().then(
       (response: any) => {
-        console.log(response);
         this.setState({
           content: response.data.data
         });
@@ -46,12 +45,15 @@ export default class BoardUser extends Component<Props, State> {
   }
 
   render() {
+
     const columns: GridColDef[] = [
       // { field: 'id', headerName: '#', width: 100 },
-      { field: 'username', headerName: 'User Name', width: 180 },
-      { field: 'roles', headerName: 'Roles', width: 180 },
-      { field: 'remark', headerName: 'Remark', width: 180 },
-      { field: 'status', headerName: 'Status', width: 130, type: 'boolean' },
+      { field: 'transfer_acc', headerName: 'Transfer Account', width: 200 },
+      { field: 'receive_acc', headerName: 'Receive Account', width: 200 },
+      { field: 'transfer_type', headerName: 'Transfer Type', width: 150 },
+      { field: 'transfer_amount', headerName: 'Amount', width: 150, type: 'number' },
+      { field: 'remark', headerName: 'Remark', width: 150 },
+      { field: 'transfer_complete', headerName: 'Complete', width: 150, type: 'boolean' },
       {
         field: 'updated_at', headerName: 'Updated', width: 150,
         renderCell: (data: any) => {

@@ -38,30 +38,37 @@ export default class Profile extends Component<Props, State> {
     return (
       <div className="container">
         {(this.state.userReady) ?
-          <div>
-            <header className="jumbotron">
-              <h3>
-                <strong>{currentUser.username}</strong> Profile
+          <div className="jumbotron">
+            <header>
+              <img
+                src="//ssl.gstatic.com/accounts/ui/avatar_2x.png"
+                alt="profile-img"
+                className="profile-img-card"
+              />
+              <h3 style={{ textAlign: 'center' }}>
+                <strong>{currentUser.username}</strong>
               </h3>
             </header>
-            <p>
+            {/* <p>
               <strong>Token:</strong>{" "}
-              {/* {currentUser.accessToken.substring(0, 20)} ...{" "}
-              {currentUser.accessToken.substr(currentUser.accessToken.length - 20)} */}
-            </p>
-            <p>
-              <strong>Id:</strong>{" "}
-              {currentUser.id}
-            </p>
-            <p>
-              <strong>Email:</strong>{" "}
-              {currentUser.status}
-            </p>
-            <strong>Authorities:</strong>
-            <ul>
-              {/* {currentUser.roles &&
-                currentUser.roles.map((role, index) => <li key={index}>{role}</li>)} */}
-            </ul>
+              {currentUser.accessToken.substring(0, 20)} ...{" "}
+              {currentUser.accessToken.substr(currentUser.accessToken.length - 20)}
+            </p> */}
+            <div className="card card-container">
+              <p>
+                <strong>Username:</strong>{" "}
+                {currentUser.username}
+              </p>
+              <p>
+                <strong>Active:</strong>{" "}
+                {('' + !!currentUser.status).toUpperCase()}
+              </p>
+
+              <p>
+                <strong>Authorities:</strong>{" "}
+                {currentUser.roles}
+              </p>
+            </div>
           </div> : null}
       </div>
     );

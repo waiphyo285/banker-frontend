@@ -11,16 +11,17 @@ import Register from "./components/register.component";
 import Home from "./components/home.component";
 import Profile from "./components/profile.component";
 import BoardUser from "./components/board-user.component";
-import BoardModerator from "./components/board-moderator.component";
-import BoardAdmin from "./components/board-admin.component";
+import BoardCustomer from "./components/board-customer.component";
+import BoardHistory from "./components/board-history.component";
+import NewCustomer from "./components/new-customer.component";
 
 import EventBus from "./common/EventBus";
 
 type Props = {};
 
 type State = {
-  showModeratorBoard: boolean,
-  showAdminBoard: boolean,
+  showCustomerBoard: boolean,
+  showUserBoard: boolean,
   currentUser: IUser | undefined
 }
 
@@ -30,8 +31,8 @@ class App extends Component<Props, State> {
     this.logOut = this.logOut.bind(this);
 
     this.state = {
-      showModeratorBoard: false,
-      showAdminBoard: false,
+      showCustomerBoard: false,
+      showUserBoard: false,
       currentUser: undefined,
     };
   }
@@ -42,8 +43,8 @@ class App extends Component<Props, State> {
     if (user) {
       this.setState({
         currentUser: user,
-        showModeratorBoard: user.roles.includes("ROLE_MODERATOR"),
-        showAdminBoard: user.roles.includes("ROLE_ADMIN"),
+        showCustomerBoard: user.roles.includes("MODERATOR"),
+        showUserBoard: user.roles.includes("ADMIN"),
       });
     }
 
@@ -57,14 +58,14 @@ class App extends Component<Props, State> {
   logOut() {
     AuthService.logout();
     this.setState({
-      showModeratorBoard: false,
-      showAdminBoard: false,
+      showCustomerBoard: false,
+      showUserBoard: false,
       currentUser: undefined,
     });
   }
 
   render() {
-    const { currentUser, showModeratorBoard, showAdminBoard } = this.state;
+    const { currentUser, showCustomerBoard, showUserBoard } = this.state;
 
     return (
       <div>
@@ -79,26 +80,26 @@ class App extends Component<Props, State> {
               </Link>
             </li>
 
-            {showModeratorBoard && (
+            {showUserBoard && (
               <li className="nav-item">
-                <Link to={"/mod"} className="nav-link">
-                  Moderator Board
+                <Link to={"/user"} className="nav-link">
+                  User
                 </Link>
               </li>
             )}
 
-            {showAdminBoard && (
+            {showCustomerBoard && (
               <li className="nav-item">
-                <Link to={"/admin"} className="nav-link">
-                  Admin Board
+                <Link to={"/customer"} className="nav-link">
+                  Customer
                 </Link>
               </li>
             )}
 
             {currentUser && (
               <li className="nav-item">
-                <Link to={"/user"} className="nav-link">
-                  User
+                <Link to={"/history"} className="nav-link">
+                  History
                 </Link>
               </li>
             )}
@@ -113,7 +114,7 @@ class App extends Component<Props, State> {
               </li>
               <li className="nav-item">
                 <a href="/login" className="nav-link" onClick={this.logOut}>
-                  LogOut
+                  Log Out
                 </a>
               </li>
             </div>
@@ -121,7 +122,7 @@ class App extends Component<Props, State> {
             <div className="navbar-nav ml-auto">
               <li className="nav-item">
                 <Link to={"/login"} className="nav-link">
-                  Login
+                  Log In
                 </Link>
               </li>
 
@@ -140,9 +141,10 @@ class App extends Component<Props, State> {
             <Route exact path="/login" component={Login} />
             <Route exact path="/register" component={Register} />
             <Route exact path="/profile" component={Profile} />
+            <Route path="/history" component={BoardHistory} />
+            <Route path="/customer" component={BoardCustomer} />
             <Route path="/user" component={BoardUser} />
-            <Route path="/mod" component={BoardModerator} />
-            <Route path="/admin" component={BoardAdmin} />
+            <Route path="/new_customer" component={NewCustomer} />
           </Switch>
         </div>
 

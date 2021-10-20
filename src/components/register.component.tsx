@@ -110,6 +110,7 @@ export default class Register extends Component<Props, State> {
             <Form>
               {!successful && (
                 <div>
+                  <h4 style={{ textAlign: "center" }}>Sign Up</h4>
                   <div className="form-group">
                     <label htmlFor="username"> Username </label>
                     <Field name="username" type="text" className="form-control" />
@@ -126,21 +127,6 @@ export default class Register extends Component<Props, State> {
                       name="password"
                       type="password"
                       className="form-control"
-                    />
-                  </div>
-
-                  <div className="form-group">
-                    <label htmlFor="account_type"> Account Type </label>
-                    <Field component="select" name="account_type" type="text" className="form-control">
-                      <option value="current">Current Account</option>
-                      <option value="savings">Savings Account.</option>
-                      <option value="recurring_deposit">Recurring Deposit Account</option>
-                      <option value="fixed_deposit">Fixed Deposit Account</option>
-                    </Field>
-                    <ErrorMessage
-                      name="account_type"
-                      component="div"
-                      className="alert alert-danger"
                     />
                   </div>
 

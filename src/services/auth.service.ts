@@ -12,7 +12,6 @@ class AuthService {
       })
       .then(response => {
         if (response.data.status === 200) {
-          console.log("RESP DATA ", response.data.data)
           localStorage.setItem("user", JSON.stringify(response.data.data));
         }
 
@@ -33,7 +32,6 @@ class AuthService {
 
   getCurrentUser() {
     const userStr = localStorage.getItem("user");
-    console.log("userStr ", userStr)
     if (userStr) return JSON.parse(userStr);
 
     return null;

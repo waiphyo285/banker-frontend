@@ -1,5 +1,6 @@
 import axios from 'axios';
 import authHeader from './auth-header';
+// import socketIOClient from "socket.io-client";
 require('dotenv').config();
 
 const API_URL = process.env.API_URL || 'http://localhost:7070'
@@ -28,6 +29,11 @@ class UserService {
   postTransferMoney(transferObj: object) {
     return axios.post(API_URL + "/transfers/create", transferObj);
   }
+
+  // testSocket() {
+  //   const socket = socketIOClient(API_URL);
+  //   return socket.on("FromAPI", data => data)
+  // }
 }
 
 export default new UserService();

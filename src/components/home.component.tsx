@@ -1,4 +1,5 @@
 import { Component } from "react";
+import socketIOClient from "socket.io-client";
 import { Formik, Field, Form, ErrorMessage } from "formik";
 import * as Yup from "yup";
 
@@ -152,6 +153,8 @@ export default class Register extends Component<Props, State> {
   }
 
   componentDidMount() {
+
+
     userService.getCustomerBoard().then(
       (response: any) => {
         this.setState({
@@ -161,7 +164,6 @@ export default class Register extends Component<Props, State> {
           receive_acc: response.data.data
         });
 
-        console.log(this.state.all_account);
       },
       error => {
         this.setState({
@@ -200,7 +202,7 @@ export default class Register extends Component<Props, State> {
             <Form>
               {!successful && (
                 <div>
-                  <h4 style={{ textAlign: "center" }}>Transfer Money</h4>
+                  <h4 style={{ textAlign: "center" }}>Transfer  Money</h4>
 
                   <div className="form-group">
                     <label htmlFor="transfer_acc_id"> From Account </label>

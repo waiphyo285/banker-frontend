@@ -3,6 +3,7 @@ import { Switch, Route, Link } from "react-router-dom";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./App.css";
 
+import UserService from "./services/user.service";
 import AuthService from "./services/auth.service";
 import IUser from './types/user.type';
 
@@ -13,16 +14,20 @@ import Profile from "./components/profile.component";
 import BoardUser from "./components/board-user.component";
 import BoardCustomer from "./components/board-customer.component";
 import BoardHistory from "./components/board-history.component";
-import NewCustomer from "./components/new-customer.component";
+import NewCustomer from "./components/customer.component";
+import Notification from "./components/notification.component";
+import socketIOClient from "socket.io-client";
 
 import EventBus from "./common/EventBus";
+import { Alert, AlertTitle, Badge, Box, Button, Collapse, IconButton } from "@mui/material";
 
 type Props = {};
 
 type State = {
   showCustomerBoard: boolean,
   showUserBoard: boolean,
-  currentUser: IUser | undefined
+  currentUser: IUser | undefined,
+  content: object[]
 }
 
 class App extends Component<Props, State> {
@@ -34,6 +39,7 @@ class App extends Component<Props, State> {
       showCustomerBoard: false,
       showUserBoard: false,
       currentUser: undefined,
+      content: []
     };
   }
 
@@ -42,11 +48,17 @@ class App extends Component<Props, State> {
 
     if (user) {
       this.setState({
+        ...this.state,
         currentUser: user,
         showCustomerBoard: user.roles.includes("MODERATOR"),
         showUserBoard: user.roles.includes("ADMIN"),
       });
     }
+
+    const socket = socketIOClient("http://localhost:7070");
+    socket.on("FromAPI", data => {
+      this.setState({ ...this.state, content: data.data });
+    });
 
     EventBus.on("logout", this.logOut);
   }
@@ -66,6 +78,7 @@ class App extends Component<Props, State> {
 
   render() {
     const { currentUser, showCustomerBoard, showUserBoard } = this.state;
+    const notificationLength = this.state.content.length || 0;
 
     return (
       <div>
@@ -103,37 +116,45 @@ class App extends Component<Props, State> {
                 </Link>
               </li>
             )}
+
+            <li className="nav-item">
+              <Link to={"/notification"} className="nav-link">
+                Notification <Badge variant='standard' >{notificationLength}</Badge>
+              </Link>
+            </li>
           </div>
 
-          {currentUser ? (
-            <div className="navbar-nav ml-auto">
-              <li className="nav-item">
-                <Link to={"/profile"} className="nav-link">
-                  {currentUser.username}
-                </Link>
-              </li>
-              <li className="nav-item">
-                <a href="/login" className="nav-link" onClick={this.logOut}>
-                  Log Out
-                </a>
-              </li>
-            </div>
-          ) : (
-            <div className="navbar-nav ml-auto">
-              <li className="nav-item">
-                <Link to={"/login"} className="nav-link">
-                  Log In
-                </Link>
-              </li>
+          {
+            currentUser ? (
+              <div className="navbar-nav ml-auto">
+                <li className="nav-item">
+                  <Link to={"/profile"} className="nav-link">
+                    {currentUser.username}
+                  </Link>
+                </li>
+                <li className="nav-item">
+                  <a href="/login" className="nav-link" onClick={this.logOut}>
+                    Log Out
+                  </a>
+                </li>
+              </div>
+            ) : (
+              <div className="navbar-nav ml-auto">
+                <li className="nav-item">
+                  <Link to={"/login"} className="nav-link">
+                    Log In
+                  </Link>
+                </li>
 
-              <li className="nav-item">
-                <Link to={"/register"} className="nav-link">
-                  Sign Up
-                </Link>
-              </li>
-            </div>
-          )}
-        </nav>
+                <li className="nav-item">
+                  <Link to={"/register"} className="nav-link">
+                    Sign Up
+                  </Link>
+                </li>
+              </div>
+            )
+          }
+        </nav >
 
         <div className="container mt-3">
           <Switch>
@@ -141,15 +162,16 @@ class App extends Component<Props, State> {
             <Route exact path="/login" component={Login} />
             <Route exact path="/register" component={Register} />
             <Route exact path="/profile" component={Profile} />
+            <Route path="/user" component={BoardUser} />
             <Route path="/history" component={BoardHistory} />
             <Route path="/customer" component={BoardCustomer} />
-            <Route path="/user" component={BoardUser} />
             <Route path="/new_customer" component={NewCustomer} />
+            <Route path="/notification" component={Notification} />
           </Switch>
         </div>
 
         { /*<AuthVerify logOut={this.logOut}/> */}
-      </div>
+      </div >
     );
   }
 }

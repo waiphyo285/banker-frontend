@@ -91,7 +91,7 @@ export default class BoardCustomer extends Component<Props, State> {
     const rows = this.state.content;
 
     return (
-      <div style={{ height: 400 }}>
+      <div style={{ height: 600 }}>
         <Toolbar>
           <Typography color="inherit" style={{ flex: 1, textAlign: "center", fontSize: 18 }}>
             Customer List
@@ -103,8 +103,8 @@ export default class BoardCustomer extends Component<Props, State> {
         <DataGrid
           rows={rows}
           columns={columns}
-          pageSize={5}
-          rowsPerPageOptions={[5]}
+          pageSize={8}
+          rowsPerPageOptions={[8]}
         // checkboxSelection
         />
       </div >

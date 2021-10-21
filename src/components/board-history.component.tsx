@@ -52,6 +52,7 @@ export default class BoardHistory extends Component<Props, State> {
       { field: 'receive_acc', headerName: 'Receive Account', width: 200 },
       { field: 'transfer_type', headerName: 'Transfer Type', width: 150 },
       { field: 'transfer_amount', headerName: 'Amount', width: 150, type: 'number' },
+      { field: 'transfer_charge', headerName: 'Charge', width: 150, type: 'number' },
       { field: 'remark', headerName: 'Remark', width: 150 },
       { field: 'transfer_complete', headerName: 'Complete', width: 150, type: 'boolean' },
       {
@@ -89,10 +90,10 @@ export default class BoardHistory extends Component<Props, State> {
     const rows = this.state.content;
 
     return (
-      <div style={{ height: 400 }}>
+      <div style={{ height: 600 }}>
         <Toolbar>
           <Typography color="inherit" style={{ flex: 1, textAlign: "center", fontSize: 18 }}>
-            User List
+            History List
           </Typography>
 
           {/* <Link href="/register">New</Link> */}
@@ -101,8 +102,8 @@ export default class BoardHistory extends Component<Props, State> {
         <DataGrid
           rows={rows}
           columns={columns}
-          pageSize={5}
-          rowsPerPageOptions={[5]}
+          pageSize={8}
+          rowsPerPageOptions={[8]}
         // checkboxSelection
         />
       </div >

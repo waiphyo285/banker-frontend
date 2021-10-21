@@ -1,5 +1,6 @@
 import axios from "axios";
-require('dotenv').config();
+import * as dotenv from "dotenv";
+dotenv.config({ path: __dirname + '/.env' });
 
 const API_URL = process.env.API_URL || 'http://localhost:7070';
 

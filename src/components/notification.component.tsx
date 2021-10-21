@@ -60,34 +60,43 @@ export default class BoardHistory extends Component<Props, State> {
         const content = this.state.content;
 
         return (
-            <List sx={{ width: '100%', bgcolor: 'background.paper' }}>
-                {content.map((item: any, idx: any) =>
-                    <div>
-                        <ListItem key={idx} alignItems="flex-start">
-                            <ListItemAvatar>
-                                <Avatar alt="Travis Howard" src="/static/images/avatar/1.jpg" />
-                            </ListItemAvatar>
-                            <ListItemText
-                                primary={item.transfer_type.toUpperCase() + " Transfer  "}
-                                secondary={
-                                    <React.Fragment>
-                                        <Typography
-                                            sx={{ display: 'inline' }}
-                                            component="span"
-                                            variant="body2"
-                                            color="text.primary"
-                                        >
-                                            to {item.receive_acc}
-                                        </Typography>
-                                        {" — " + item.transfer_amount + "MMK was transferred from " + item.transfer_acc}
-                                    </React.Fragment>
-                                }
-                            />
-                        </ListItem>
-                        <Divider variant="inset" component="li" />
-                    </div>
-                )}
-            </List>
+            <>
+                <Toolbar>
+                    <Typography color="inherit" style={{ flex: 1, textAlign: "center", fontSize: 18 }}>
+                        Notification
+                    </Typography>
+
+                    {/* <Link href="/register">New</Link> */}
+                </Toolbar>
+                <List sx={{ width: '100%', maxHeight: 600, overflowY: 'auto', bgcolor: 'background.paper' }}>
+                    {content.map((item: any, idx: any) =>
+                        <div key={idx}>
+                            <ListItem alignItems="flex-start">
+                                <ListItemAvatar>
+                                    <Avatar alt="Travis Howard" src="/static/images/avatar/1.jpg" />
+                                </ListItemAvatar>
+                                <ListItemText
+                                    primary={item.transfer_type.toUpperCase() + " Transfer  "}
+                                    secondary={
+                                        <React.Fragment>
+                                            <Typography
+                                                sx={{ display: 'inline' }}
+                                                component="span"
+                                                variant="body2"
+                                                color="text.primary"
+                                            >
+                                                to {item.receive_acc}
+                                            </Typography>
+                                            {" — " + item.transfer_amount + "MMK was transferred from " + item.transfer_acc}
+                                        </React.Fragment>
+                                    }
+                                />
+                            </ListItem>
+                            <Divider variant="inset" component="li" />
+                        </div>
+                    )}
+                </List>
+            </>
         );
     }
 }

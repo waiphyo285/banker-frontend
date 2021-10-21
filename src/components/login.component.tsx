@@ -49,10 +49,12 @@ export default class Login extends Component<Props, State> {
 
     AuthService.login(username, password).then(
       () => {
-        this.props.history.push("/profile");
+
+        // window.location.href = "/profile";
+        this.props.history.push("/home");
         window.location.reload();
       },
-      error => {
+      (error: any) => {
         const resMessage =
           (error.response &&
             error.response.data &&

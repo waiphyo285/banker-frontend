@@ -1,13 +1,14 @@
 import axios from 'axios';
 import authHeader from './auth-header';
 // import socketIOClient from "socket.io-client";
-require('dotenv').config();
+import * as dotenv from "dotenv";
+dotenv.config({ path: __dirname + '/.env' });
 
 const API_URL = process.env.API_URL || 'http://localhost:7070'
 
 class UserService {
   getPublicContent() {
-    return axios.get(API_URL + '/roles/all');
+    return axios.get(API_URL + '/roles/all', { headers: authHeader() });
   }
 
   getUserBoard() {
@@ -23,11 +24,12 @@ class UserService {
   }
 
   postNewCustomer(username: string, password: string, account_type: string) {
-    return axios.post(API_URL + "/customers/create", { username, password, account_type });
+    return axios.post(API_URL + "/customers/create", { username, password, account_type }, { headers: authHeader() });
   }
 
   postTransferMoney(transferObj: object) {
-    return axios.post(API_URL + "/transfers/create", transferObj);
+    console.log("HI", transferObj);
+    return axios.post(API_URL + "/transfers/create", transferObj, { headers: authHeader() });
   }
 
   // testSocket() {

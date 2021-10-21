@@ -3,8 +3,13 @@ import { Formik, Field, Form, ErrorMessage } from "formik";
 import * as Yup from "yup";
 
 import AuthService from "../services/auth.service";
+import { RouteComponentProps } from "react-router-dom";
 
-type Props = {};
+interface RouterProps {
+  history: string;
+}
+
+type Props = RouteComponentProps<RouterProps>;
 
 type State = {
   username: string,
@@ -68,6 +73,9 @@ export default class Register extends Component<Props, State> {
           message: response.data.message,
           successful: true
         });
+
+        this.props.history.push("/login");
+        window.location.reload();
       },
       error => {
         const resMessage =

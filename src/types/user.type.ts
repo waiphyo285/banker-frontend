@@ -3,5 +3,6 @@ export default interface IUser {
   username?: string | null,
   password?: string,
   roles?: Array<string>
-  status?: boolean
+  status?: boolean,
+  token?: string
 }

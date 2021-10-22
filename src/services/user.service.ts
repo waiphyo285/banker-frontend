@@ -4,7 +4,7 @@ import authHeader from './auth-header';
 import * as dotenv from "dotenv";
 dotenv.config({ path: __dirname + '/.env' });
 
-const API_URL = process.env.API_URL || 'http://localhost:7070'
+const API_URL = process.env.API_URL || 'http://50.17.29.48:7070'
 
 class UserService {
   getPublicContent() {

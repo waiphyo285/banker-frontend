@@ -2,7 +2,7 @@ import axios from "axios";
 import * as dotenv from "dotenv";
 dotenv.config({ path: __dirname + '/.env' });
 
-const API_URL = process.env.API_URL || 'http://localhost:7070';
+const API_URL = process.env.API_URL || 'http://50.17.29.48:7070';
 
 class AuthService {
   login(username: string, password: string) {

@@ -3,7 +3,7 @@ import { Switch, Route, Redirect, Link } from "react-router-dom";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./App.css";
 
-import UserService from "./services/user.service";
+// import UserService from "./services/user.service";
 import AuthService from "./services/auth.service";
 import IUser from './types/user.type';
 
@@ -19,7 +19,7 @@ import Notification from "./components/notification.component";
 import socketIOClient from "socket.io-client";
 
 import EventBus from "./common/EventBus";
-import { Alert, AlertTitle, Badge, Box, Button, Collapse, IconButton } from "@mui/material";
+import { Badge } from "@mui/material";
 
 type Props = {};
 

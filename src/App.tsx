@@ -165,7 +165,7 @@ class App extends Component<Props, State> {
           <Switch>
             <Route exact path="/login" component={Login} />
             <Route exact path="/register" component={Register} />
-            {/* {!currentUser ? (
+            {!currentUser ? (
               <Redirect to={{
                 pathname: '/login'
               }} />
@@ -179,14 +179,14 @@ class App extends Component<Props, State> {
                 <Route path="/new_customer" component={NewCustomer} />
                 <Route path="/notification" component={Notification} />
               </>
-            )} */}
-            <Route exact path={["/", "/home"]} component={Home} />
+            )}
+            {/* <Route exact path={["/", "/home"]} component={Home} />
             <Route exact path="/profile" component={Profile} />
             <Route exact path="/user" component={BoardUser} />
             <Route exact path="/history" component={BoardHistory} />
             <Route exact path="/customer" component={BoardCustomer} />
             <Route exact path="/new_customer" component={NewCustomer} />
-            <Route exact path="/notification" component={Notification} />
+            <Route exact path="/notification" component={Notification} /> */}
           </Switch>
         </div>
 

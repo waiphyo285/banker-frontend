@@ -1,7 +1,7 @@
 import * as dotenv from "dotenv";
 // dotenv.config({ path: __dirname + '/.env' });
 import axios from "axios";
-const API_URL = process.env.API_URL || 'http://50.17.29.48:7070';
+const API_URL = process.env.API_URL || 'http://localhost:7070';
 
 // Step-1: Create a new Axios instance with a custom config.
 // The timeout is set to 10s. If the request takes longer than

@@ -14,7 +14,7 @@ import Profile from "./components/profile.component";
 import BoardUser from "./components/board-user.component";
 import BoardCustomer from "./components/board-customer.component";
 import BoardHistory from "./components/board-history.component";
-import NewCustomer from "./components/customer.component";
+import Customer from "./components/customer.component";
 import Notification from "./components/notification.component";
 import socketIOClient from "socket.io-client";
 
@@ -79,6 +79,8 @@ class App extends Component<Props, State> {
   render() {
     const { currentUser, showCustomerBoard, showUserBoard } = this.state;
     const notificationLength = this.state.content.length || 0;
+
+    console.log("Me ", currentUser);
 
     return (
       <div>
@@ -176,7 +178,7 @@ class App extends Component<Props, State> {
                 <Route path="/user" component={BoardUser} />
                 <Route path="/history" component={BoardHistory} />
                 <Route path="/customer" component={BoardCustomer} />
-                <Route path="/new_customer" component={NewCustomer} />
+                <Route path="/new_customer" component={Customer} />
                 <Route path="/notification" component={Notification} />
               </>
             )}

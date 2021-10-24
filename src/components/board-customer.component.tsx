@@ -1,12 +1,17 @@
 import { Component } from "react";
 // import fakeData from "../data/user.json";
 import UserService from "../services/user.service";
-import { Button, Link, Toolbar, Typography } from "@mui/material";
+import { Button, Toolbar, Typography } from "@mui/material";
 import { DataGrid, GridApi, GridCellValue, GridColDef } from "@mui/x-data-grid";
 import EventBus from "../common/EventBus";
+import { RouteComponentProps } from "react-router";
 
 
-type Props = {};
+interface RouterProps {
+  history: string;
+}
+
+type Props = RouteComponentProps<RouterProps>;
 
 type State = {
   content: object[]
@@ -45,6 +50,11 @@ export default class BoardCustomer extends Component<Props, State> {
         }
       }
     );
+  }
+
+  routeChange = () => {
+    this.props.history.push("/new_customer");
+    // window.location.reload();
   }
 
   render() {
@@ -97,7 +107,12 @@ export default class BoardCustomer extends Component<Props, State> {
             Customer List
           </Typography>
 
-          <Link href="/new_customer">New</Link>
+          <Button color="primary" className="px-4"
+            onClick={this.routeChange}
+          >
+            New
+          </Button>
+
         </Toolbar>
 
         <DataGrid
